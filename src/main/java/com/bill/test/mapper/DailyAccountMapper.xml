@@ -280,4 +280,283 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <resultMap id="BaseResultMap" type="com.bill.test.model.DailyAccount">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="prefix_date" jdbcType="DATE" property="prefixDate" />
+    <result column="prefix_week" jdbcType="TINYINT" property="prefixWeek" />
+    <result column="total_gmv" jdbcType="DECIMAL" property="totalGmv" />
+    <result column="pay_money" jdbcType="DECIMAL" property="payMoney" />
+    <result column="total_gross_profit" jdbcType="DECIMAL" property="totalGrossProfit" />
+    <result column="online_sku" jdbcType="INTEGER" property="onlineSku" />
+    <result column="movable_pin_sku" jdbcType="INTEGER" property="movablePinSku" />
+    <result column="sellout_sku" jdbcType="INTEGER" property="selloutSku" />
+    <result column="customers" jdbcType="INTEGER" property="customers" />
+    <result column="orders" jdbcType="INTEGER" property="orders" />
+    <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
+    <result column="piece_price" jdbcType="DECIMAL" property="piecePrice" />
+    <result column="penetration_number" jdbcType="DECIMAL" property="penetrationNumber" />
+    <result column="gross_profit_margin" jdbcType="DECIMAL" property="grossProfitMargin" />
+    <result column="upper_shelf_sku" jdbcType="INTEGER" property="upperShelfSku" />
+    <result column="reserve" jdbcType="VARCHAR" property="reserve" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, prefix_date, prefix_week, total_gmv, pay_money, total_gross_profit, online_sku, 
+    movable_pin_sku, sellout_sku, customers, orders, unit_price, piece_price, penetration_number, 
+    gross_profit_margin, upper_shelf_sku, reserve, creator, updator, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_daily_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_daily_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bill.test.model.DailyAccount">
+    insert into tb_daily_account (id, prefix_date, prefix_week, 
+      total_gmv, pay_money, total_gross_profit, 
+      online_sku, movable_pin_sku, sellout_sku, 
+      customers, orders, unit_price, 
+      piece_price, penetration_number, gross_profit_margin, 
+      upper_shelf_sku, reserve, creator, 
+      updator, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{prefixDate,jdbcType=DATE}, #{prefixWeek,jdbcType=TINYINT}, 
+      #{totalGmv,jdbcType=DECIMAL}, #{payMoney,jdbcType=DECIMAL}, #{totalGrossProfit,jdbcType=DECIMAL}, 
+      #{onlineSku,jdbcType=INTEGER}, #{movablePinSku,jdbcType=INTEGER}, #{selloutSku,jdbcType=INTEGER}, 
+      #{customers,jdbcType=INTEGER}, #{orders,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, 
+      #{piecePrice,jdbcType=DECIMAL}, #{penetrationNumber,jdbcType=DECIMAL}, #{grossProfitMargin,jdbcType=DECIMAL}, 
+      #{upperShelfSku,jdbcType=INTEGER}, #{reserve,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{updator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bill.test.model.DailyAccount">
+    insert into tb_daily_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="prefixDate != null">
+        prefix_date,
+      </if>
+      <if test="prefixWeek != null">
+        prefix_week,
+      </if>
+      <if test="totalGmv != null">
+        total_gmv,
+      </if>
+      <if test="payMoney != null">
+        pay_money,
+      </if>
+      <if test="totalGrossProfit != null">
+        total_gross_profit,
+      </if>
+      <if test="onlineSku != null">
+        online_sku,
+      </if>
+      <if test="movablePinSku != null">
+        movable_pin_sku,
+      </if>
+      <if test="selloutSku != null">
+        sellout_sku,
+      </if>
+      <if test="customers != null">
+        customers,
+      </if>
+      <if test="orders != null">
+        orders,
+      </if>
+      <if test="unitPrice != null">
+        unit_price,
+      </if>
+      <if test="piecePrice != null">
+        piece_price,
+      </if>
+      <if test="penetrationNumber != null">
+        penetration_number,
+      </if>
+      <if test="grossProfitMargin != null">
+        gross_profit_margin,
+      </if>
+      <if test="upperShelfSku != null">
+        upper_shelf_sku,
+      </if>
+      <if test="reserve != null">
+        reserve,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="updator != null">
+        updator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="prefixDate != null">
+        #{prefixDate,jdbcType=DATE},
+      </if>
+      <if test="prefixWeek != null">
+        #{prefixWeek,jdbcType=TINYINT},
+      </if>
+      <if test="totalGmv != null">
+        #{totalGmv,jdbcType=DECIMAL},
+      </if>
+      <if test="payMoney != null">
+        #{payMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="totalGrossProfit != null">
+        #{totalGrossProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="onlineSku != null">
+        #{onlineSku,jdbcType=INTEGER},
+      </if>
+      <if test="movablePinSku != null">
+        #{movablePinSku,jdbcType=INTEGER},
+      </if>
+      <if test="selloutSku != null">
+        #{selloutSku,jdbcType=INTEGER},
+      </if>
+      <if test="customers != null">
+        #{customers,jdbcType=INTEGER},
+      </if>
+      <if test="orders != null">
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null">
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="piecePrice != null">
+        #{piecePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="penetrationNumber != null">
+        #{penetrationNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="grossProfitMargin != null">
+        #{grossProfitMargin,jdbcType=DECIMAL},
+      </if>
+      <if test="upperShelfSku != null">
+        #{upperShelfSku,jdbcType=INTEGER},
+      </if>
+      <if test="reserve != null">
+        #{reserve,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updator != null">
+        #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bill.test.model.DailyAccount">
+    update tb_daily_account
+    <set>
+      <if test="prefixDate != null">
+        prefix_date = #{prefixDate,jdbcType=DATE},
+      </if>
+      <if test="prefixWeek != null">
+        prefix_week = #{prefixWeek,jdbcType=TINYINT},
+      </if>
+      <if test="totalGmv != null">
+        total_gmv = #{totalGmv,jdbcType=DECIMAL},
+      </if>
+      <if test="payMoney != null">
+        pay_money = #{payMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="totalGrossProfit != null">
+        total_gross_profit = #{totalGrossProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="onlineSku != null">
+        online_sku = #{onlineSku,jdbcType=INTEGER},
+      </if>
+      <if test="movablePinSku != null">
+        movable_pin_sku = #{movablePinSku,jdbcType=INTEGER},
+      </if>
+      <if test="selloutSku != null">
+        sellout_sku = #{selloutSku,jdbcType=INTEGER},
+      </if>
+      <if test="customers != null">
+        customers = #{customers,jdbcType=INTEGER},
+      </if>
+      <if test="orders != null">
+        orders = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null">
+        unit_price = #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="piecePrice != null">
+        piece_price = #{piecePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="penetrationNumber != null">
+        penetration_number = #{penetrationNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="grossProfitMargin != null">
+        gross_profit_margin = #{grossProfitMargin,jdbcType=DECIMAL},
+      </if>
+      <if test="upperShelfSku != null">
+        upper_shelf_sku = #{upperShelfSku,jdbcType=INTEGER},
+      </if>
+      <if test="reserve != null">
+        reserve = #{reserve,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updator != null">
+        updator = #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bill.test.model.DailyAccount">
+    update tb_daily_account
+    set prefix_date = #{prefixDate,jdbcType=DATE},
+      prefix_week = #{prefixWeek,jdbcType=TINYINT},
+      total_gmv = #{totalGmv,jdbcType=DECIMAL},
+      pay_money = #{payMoney,jdbcType=DECIMAL},
+      total_gross_profit = #{totalGrossProfit,jdbcType=DECIMAL},
+      online_sku = #{onlineSku,jdbcType=INTEGER},
+      movable_pin_sku = #{movablePinSku,jdbcType=INTEGER},
+      sellout_sku = #{selloutSku,jdbcType=INTEGER},
+      customers = #{customers,jdbcType=INTEGER},
+      orders = #{orders,jdbcType=INTEGER},
+      unit_price = #{unitPrice,jdbcType=DECIMAL},
+      piece_price = #{piecePrice,jdbcType=DECIMAL},
+      penetration_number = #{penetrationNumber,jdbcType=DECIMAL},
+      gross_profit_margin = #{grossProfitMargin,jdbcType=DECIMAL},
+      upper_shelf_sku = #{upperShelfSku,jdbcType=INTEGER},
+      reserve = #{reserve,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      updator = #{updator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>

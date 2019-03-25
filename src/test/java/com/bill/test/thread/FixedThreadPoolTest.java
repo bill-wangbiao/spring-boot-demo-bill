@@ -25,7 +25,7 @@ public class FixedThreadPoolTest {
         try {
             /**固定线程池**/
             List<Integer> list=new ArrayList<>();
-            for(int i=0;i<50;i++){
+            for(int i=0;i<600000;i++){
                 list.add(i);
             }
             int size=list.size();
@@ -53,6 +53,7 @@ public class FixedThreadPoolTest {
     }
 
     static class ListSplit implements Runnable{
+        private static final Object lock = new Object();
         List<Integer> listSub;
         List<String> listStr;
         public ListSplit(List<Integer> listSub, List<String> listStr) {
@@ -62,7 +63,9 @@ public class FixedThreadPoolTest {
         @Override
         public void run() {
             for(Integer i:listSub){
-                listStr.add(String.valueOf(i));
+                synchronized(lock){
+                    listStr.add(String.valueOf(i));
+                }
             }
         }
     }

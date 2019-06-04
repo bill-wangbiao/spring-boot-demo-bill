@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.0.RELEASE</version>
+		<version>1.5.10.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -57,16 +57,31 @@
 			<version>1.18.6</version>
 			<scope>provided</scope>
 		</dependency>
-        <dependency>
-            <groupId>com.ctrip.framework.apollo</groupId>
-            <artifactId>apollo-client</artifactId>
-            <version>1.3.0</version>
-        </dependency>
-        <dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.ctrip.framework.apollo</groupId>-->
+            <!--<artifactId>apollo-client</artifactId>-->
+            <!--<version>1.3.0</version>-->
+        <!--</dependency>-->
+		<dependency>
+			<groupId>com.xyy.apollo</groupId>
+			<artifactId>xyy-apollo-client</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+		<dependency>
             <groupId>org.csource</groupId>
             <artifactId>fastdfs-client-java</artifactId>
             <version>1.27-SNAPSHOT</version>
         </dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.cloud</groupId>-->
+			<!--<artifactId>spring-cloud-starter-openfeign</artifactId>-->
+			<!--<version>2.0.0.RELEASE</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.cloud</groupId>-->
+			<!--<artifactId>spring-cloud-netflix-core</artifactId>-->
+			<!--<version>1.4.5.RELEASE</version>-->
+		<!--</dependency>-->
 
 	</dependencies>
 

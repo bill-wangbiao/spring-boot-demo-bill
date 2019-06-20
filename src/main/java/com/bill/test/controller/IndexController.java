@@ -23,7 +23,9 @@ public class IndexController {
 		return "hello world";
 	}
 
-	// @RequestParam 简单类型的绑定，可以出来get和post
+	/**
+	 * @RequestParam 简单类型的绑定，可以出来get和post
+	 */
 	@RequestMapping(value = "/get")
 	public User get(@RequestParam(value="name") String name) {
 		User user=new User();
@@ -33,7 +35,12 @@ public class IndexController {
 		return user;
 	}
 
-	// @PathVariable 获得请求url中的动态参数
+	/**
+	 *  @PathVariable 获得请求url中的动态参数
+	 * @param id
+	 * @param name
+	 * @return
+	 */
 	@RequestMapping(value = "/get/{id}/{name}")
 	public User getUser(@PathVariable int id, @PathVariable String name) {
 		User user = new User();

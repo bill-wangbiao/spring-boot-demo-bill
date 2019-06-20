@@ -27,7 +27,7 @@ public class RestTemplateController {
     @RequestMapping("/getForObject")
     public User getForObject(){
         String url="http://localhost:8088/index/get?name={name}";
-        Map map=new HashMap<String,String>();
+        Map map=new HashMap<String,String>(1);
         map.put("name","http");
         log.info("请求url:"+url+"，请求参数："+ JSONObject.toJSONString(map));
         User result = restTemplate.getForObject(url, User.class, map);

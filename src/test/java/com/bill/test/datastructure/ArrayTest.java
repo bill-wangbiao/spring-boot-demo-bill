@@ -2,6 +2,8 @@ package com.bill.test.datastructure;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @author : wangbiao
  * @version V1.0
@@ -57,5 +59,18 @@ public class ArrayTest {
             }
             System.out.println();
         }
+    }
+
+    @Test
+    public void arraycopy(){
+        int[] arr=new int[]{1,2,3,4,5};
+        System.out.println("输出数组："+ Arrays.toString(arr));
+
+        int[] array=new int[2];
+        System.arraycopy(arr,1,array,0,2);
+        System.out.println("输出copy的数组："+Arrays.toString(array));
+
+        int[] copyOf = Arrays.copyOf(arr, arr.length + 3);
+        System.out.println("输出Arrays.copyOf:"+Arrays.toString(copyOf));
     }
 }

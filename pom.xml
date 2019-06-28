@@ -95,6 +95,13 @@
 			<version>4.1.6.Final</version>
 		</dependency>
 
+		<!--这里加入activemq依赖，主要是看下activemq中基于点对点模型使用JMS1.1 API的一个例子-->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.15.3</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

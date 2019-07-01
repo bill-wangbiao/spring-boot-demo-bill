@@ -33,6 +33,11 @@ public class QueueConsumer {
             Queue myTestQueue=session.createQueue("activemq-queue-test1");
             //消息消费者
             MessageConsumer consumer=session.createConsumer(myTestQueue);
+
+            /**以下注释代码：topic订阅发布模式**/
+//            Topic topic = session.createTopic("activemq-topic-test");
+//            MessageConsumer consumer1 = session.createConsumer(topic);
+
             //消费者实现监听接口消费消息
             consumer.setMessageListener(new MessageListener() {
                 @Override

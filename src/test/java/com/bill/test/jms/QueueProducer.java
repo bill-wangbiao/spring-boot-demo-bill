@@ -10,7 +10,7 @@ import javax.jms.*;
  * @version V1.0
  * @Project: spring-boot-demo-bill
  * @Package com.bill.test.jms
- * @Description: TODO 消息生产者
+ * @Description: TODO 消息生产者，JMS规范的体系架构：分为点对点模型，发布订阅模型
  * 启动rocketmq服务：D:\github\activemq\apache-activemq-5.15.9-bin\apache-activemq-5.15.9\bin\win64
  * 控制台地址：http://localhost:8161/admin/queues.jsp
  * 账号密码：admin  admin
@@ -38,6 +38,11 @@ public class QueueProducer {
             Queue myTestQueue=session.createQueue("activemq-queue-test1");
             /**消息生产者**/
             MessageProducer producer=session.createProducer(myTestQueue);
+
+            /**以下注释代码：topic订阅发布模式**/
+//            Topic topic = session.createTopic("activemq-topic-test1");
+//            MessageProducer producer1 = session.createProducer(topic);
+
             /**创建一个消息对象**/
             TextMessage message=session.createTextMessage();
             message.setText("测试点对点的一条消息11");

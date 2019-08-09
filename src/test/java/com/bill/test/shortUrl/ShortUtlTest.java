@@ -1,5 +1,7 @@
 package com.bill.test.shortUrl;
 
+import java.util.Random;
+
 /**
  * @author : wangbiao
  * @version V1.0
@@ -19,10 +21,10 @@ public class ShortUtlTest {
                 "F11899688_192542628000_2.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bgtrtv_z%26e3Bv54Az" +
                 "dH3Fejvp56AzdH3Fzi7wgptAzdH3F8ndcam0_z%26e3Bip4s&gsm=0&rpstart=0&rpnum=0&islist=&querylist=&force=undefined";
 
-        String[] shortUrl = ShortUrlGenerator.shortUrl(longUrl);
-        for(String url:shortUrl){
-            System.out.println("输出shortURL："+url);
-        }
+        longUrl="https://www.baidu.com/pic";
+
+        String shortUrl = ShortUrlGenerator.shortUrl(longUrl);
+        System.out.println("短链地址："+shortUrl);
 
     }
 }

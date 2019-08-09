@@ -1,5 +1,7 @@
 package com.bill.test.shortUrl;
 
+import java.util.Random;
+
 /**
  * @author : wangbiao
  * @version V1.0
@@ -9,13 +11,14 @@ package com.bill.test.shortUrl;
  * @date Date : 2019年08月08日 17:07
  */
 public class ShortUrlGenerator {
+    private static final String domin="http://www.baidu.com/";
 
     /**
      *短链生成方法
      * @param url
      * @return
      */
-    public static String[] shortUrl(String url) {
+    public static String shortUrl(String url) {
         /**可以自定义生成 MD5 加密字符传前的混合 KEY**/
         String key = "wangbiao";
         /**要使用生成 URL 的字符**/
@@ -46,8 +49,14 @@ public class ShortUrlGenerator {
                 lHexLong = lHexLong >> 5;
             }
             /**把字符串存入对应索引的输出数组**/
+            System.out.println("短链字符串："+outChars);
             resUrl[i] = outChars;
         }
-        return resUrl;
+        int length = resUrl.length;
+        if(length>0 && length<5){
+            int i = new Random().nextInt(4);
+            return domin+resUrl[i];
+        }
+        return "";
     }
 }

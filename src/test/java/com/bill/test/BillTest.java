@@ -15,12 +15,18 @@ import org.junit.Test;
 public class BillTest {
     @Test
     public void subStr(){
-        String branchCode="XS420000";
-        if(branchCode.contains("XS")){
-            String s = branchCode.substring(2, branchCode.length());
-            log.info("输出s:"+s);
-            String substring = branchCode.substring(2);
-            log.info("输出substring："+substring);
-        }
+//        String branchCode="XS420000";
+//        if(branchCode.contains("XS")){
+//            String s = branchCode.substring(2, branchCode.length());
+//            log.info("输出s:"+s);
+//            String substring = branchCode.substring(2);
+//            log.info("输出substring："+substring);
+//        }
+
+        int flag=1;
+        int bit= 1<<1;
+        log.info("输出bit:"+bit);
+        flag |=bit;
+        log.info("输出："+flag);
     }
 }

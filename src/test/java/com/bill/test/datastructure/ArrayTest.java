@@ -1,8 +1,10 @@
 package com.bill.test.datastructure;
 
+import com.google.common.collect.Lists;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author : wangbiao
@@ -72,5 +74,15 @@ public class ArrayTest {
 
         int[] copyOf = Arrays.copyOf(arr, arr.length + 3);
         System.out.println("输出Arrays.copyOf:"+Arrays.toString(copyOf));
+    }
+
+    @Test
+    public void partition(){
+        List<Integer> list= Lists.newArrayList();
+        for(int i=0;i<20;i++){
+            list.add(i);
+        }
+        List<List<Integer>> partition = Lists.partition(list, 7);
+        System.out.println(partition);
     }
 }

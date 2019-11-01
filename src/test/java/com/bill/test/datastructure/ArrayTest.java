@@ -1,10 +1,10 @@
 package com.bill.test.datastructure;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author : wangbiao
@@ -84,5 +84,33 @@ public class ArrayTest {
         }
         List<List<Integer>> partition = Lists.partition(list, 7);
         System.out.println(partition);
+    }
+
+    @Test
+    public void parallelStream(){
+        List<Integer> list= Lists.newArrayList();
+        List<String> keys=Lists.newArrayList();
+        for(int i=0;i<5000;i++){
+            list.add(i);
+            keys.add(i+"");
+        }
+        System.out.println("输出list:"+ JSONObject.toJSONString(list));
+        System.out.println("输出keys:"+ JSONObject.toJSONString(keys));
+        long time=System.currentTimeMillis();
+        Map<String,Integer> map=new HashMap<>();
+        for(String key:keys){
+            map.put(key,list.get(keys.indexOf(key)));
+        }
+        System.out.println("输出map:"+JSONObject.toJSONString(map));
+        System.out.println("耗时："+(System.currentTimeMillis()-time)+"毫秒");
+
+        long time1=System.currentTimeMillis();
+        Map<String,Integer> map1= Collections.synchronizedMap(new HashMap<>());
+        keys.parallelStream().forEach(t -> {
+            map1.put(t,list.get(keys.indexOf(t)));
+        });
+
+        System.out.println("输出map1:"+JSONObject.toJSONString(map1));
+        System.out.println("耗时："+(System.currentTimeMillis()-time1)+"毫秒");
     }
 }

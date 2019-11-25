@@ -1,7 +1,10 @@
 package com.bill.test.thread;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.*;
 
 /**
@@ -56,30 +59,7 @@ public class ThreadCreatedTest {
         executorService.shutdown();
 
 
-        ExecutorService executorService1 = Executors.newCachedThreadPool();
-        List<Future<String>> resultList = new ArrayList<Future<String>>();
-        //创建10个任务并执行
-        for (int i = 0; i < 10; i++){
-            //使用ExecutorService执行Callable类型的任务，并将结果保存在future变量中
-            Future<String> future1 = executorService1.submit(new TaskWithResult(i));
-            //将任务执行结果存储到List中
-            resultList.add(future1);
-        }
 
-        //遍历任务的结果
-        for (Future<String> fs : resultList){
-            try{
-                while(!fs.isDone());//Future返回如果没有完成，则一直循环等待，直到Future返回完成
-                System.out.println("executorService1:"+fs.get());     //打印各个线程（任务）执行的结果
-            }catch(InterruptedException e){
-                e.printStackTrace();
-            }catch(ExecutionException e){
-                e.printStackTrace();
-            }finally{
-                //启动一次顺序关闭，执行以前提交的任务，但不接受新任务
-                executorService.shutdown();
-            }
-        }
 
 
 
@@ -130,6 +110,40 @@ public class ThreadCreatedTest {
 
 
     }
+
+    @Test
+    public void testIsDone(){
+        ExecutorService executorService1 = Executors.newCachedThreadPool();
+        List<Future<String>> resultList = new ArrayList<Future<String>>();
+        //创建10个任务并执行
+        for (int i = 0; i < 10; i++){
+            //使用ExecutorService执行Callable类型的任务，并将结果保存在future变量中
+            Future<String> future1 = executorService1.submit(new TaskWithResult(i));
+            //将任务执行结果存储到List中
+            resultList.add(future1);
+        }
+        //遍历任务的结果
+        for(Future<String> fs:resultList){
+            try{
+                //Future返回如果没有完成，则一直循环等待，直到Future返回完成
+                while(!fs.isDone()){
+                    //打印各个线程（任务）执行的结果
+                    System.out.println("executorService1执行结果:"+fs.get());
+                }
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }catch(ExecutionException e){
+                e.printStackTrace();
+            }finally{
+                //启动一次顺序关闭，执行以前提交的任务，但不接受新任务
+                executorService1.shutdown();
+            }
+        }
+    }
+
+
+
+
     /**********************************************************************/
     /**
      * 继承Thread类
@@ -172,7 +186,7 @@ public class ThreadCreatedTest {
         }
     }
 
-    static class TaskWithResult implements Callable<String> {
+     class TaskWithResult implements Callable<String> {
         private int id;
 
         public TaskWithResult(int id) {
@@ -184,8 +198,10 @@ public class ThreadCreatedTest {
          * 则该方法自动在一个线程上执行
          */
         @Override
-        public String call() throws Exception {
-            System.out.println("call()方法被自动调用！！！    " + Thread.currentThread().getName());
+        public  String call() throws Exception {
+//            int i = ThreadLocalRandom.current().nextInt(0, id);
+            Thread.sleep(id);
+            System.out.println("call()方法被自动调用！！！ " + Thread.currentThread().getName()+",休息了："+id+"秒");
             //该返回结果将被Future的get方法得到
             return "call()方法被自动调用，任务返回的结果是：" + id + "    " + Thread.currentThread().getName();
         }

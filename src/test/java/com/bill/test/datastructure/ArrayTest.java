@@ -2,6 +2,7 @@ package com.bill.test.datastructure;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.*;
@@ -14,6 +15,7 @@ import java.util.*;
  * @Description: 数组测试类
  * @date Date : 2019年04月24日 14:54
  */
+@Slf4j
 public class ArrayTest {
     @Test
     public void statement(){
@@ -112,5 +114,39 @@ public class ArrayTest {
 
         System.out.println("输出map1:"+JSONObject.toJSONString(map1));
         System.out.println("耗时："+(System.currentTimeMillis()-time1)+"毫秒");
+    }
+
+    @Test
+    public void retainAll(){
+        List<Integer> list1=Lists.newArrayList();
+        for(int i=0;i<5;i++){
+            list1.add(i);
+        }
+        List<Integer> list2=Lists.newArrayList();
+        for(int i=0;i<3;i++){
+            list2.add(i);
+        }
+        log.info("list1:"+JSONObject.toJSONString(list1));
+        log.info("list2:"+JSONObject.toJSONString(list2));
+        //交集
+//        list1.retainAll(list2);
+        //去差集
+        list2.removeAll(list1);
+        log.info("list1:"+JSONObject.toJSONString(list1));
+        log.info("list2:"+JSONObject.toJSONString(list2));
+        list2.parallelStream().forEach(a->{
+            log.info("输出："+a);
+        });
+    }
+
+    @Test
+    public void testA(){
+        ArrayList<Integer> list = Lists.newArrayList();
+        for(int i=0;i<10;i++){
+            list.add(i);
+        }
+        int size = list.size();
+        List<Integer> integers = list.subList(1, size);
+        log.info("输出integers："+JSONObject.toJSONString(integers));
     }
 }

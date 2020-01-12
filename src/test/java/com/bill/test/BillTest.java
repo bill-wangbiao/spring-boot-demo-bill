@@ -391,4 +391,42 @@ public class BillTest {
         log.info("输出是否相等："+(aa==11));
     }
 
+    @Test
+    public void randomAge(){
+        int age=0;
+        int ageRandom = ThreadLocalRandom.current().nextInt(0, 100);
+        log.info("输出ageRandom:"+ageRandom);
+        if (ageRandom <= 5) {
+            age=ThreadLocalRandom.current().nextInt(18, 30);
+        } else if (ageRandom <= 20) {
+            age=ThreadLocalRandom.current().nextInt(30, 45);
+        } else {
+            age=ThreadLocalRandom.current().nextInt(45, 91);
+        }
+        log.info("输出age:"+age);
+    }
+
+    @Test
+    public void testRandompay(){
+        Integer r1 = ThreadLocalRandom.current().nextInt(100);
+        Integer r2=ThreadLocalRandom.current().nextInt(100-r1);
+        Integer r3=ThreadLocalRandom.current().nextInt(100-r1-r2);
+        Integer r4=100-r1-r2-r3;
+        log.info("r1:"+r1);
+        log.info("r2:"+r2);
+        log.info("r3:"+r3);
+        log.info("r4:"+r4);
+        Integer random = ThreadLocalRandom.current().nextInt(100);
+        log.info("random："+random);
+        if(random<r1){
+            log.info("支付宝");
+        }else if (random<r1+r2){
+            log.info("微信");
+        }else if (random<r1+r2+r3){
+            log.info("银联");
+        }else {
+            log.info("现金");
+        }
+    }
+
 }

@@ -6,10 +6,12 @@ import com.bill.test.utils.RandomValue;
 import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomUtils;
 import org.assertj.core.util.DateUtil;
 import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -408,25 +410,98 @@ public class BillTest {
 
     @Test
     public void testRandompay(){
-        Integer r1 = ThreadLocalRandom.current().nextInt(100);
-        Integer r2=ThreadLocalRandom.current().nextInt(100-r1);
-        Integer r3=ThreadLocalRandom.current().nextInt(100-r1-r2);
-        Integer r4=100-r1-r2-r3;
-        log.info("r1:"+r1);
-        log.info("r2:"+r2);
-        log.info("r3:"+r3);
-        log.info("r4:"+r4);
-        Integer random = ThreadLocalRandom.current().nextInt(100);
-        log.info("random："+random);
-        if(random<r1){
-            log.info("支付宝");
-        }else if (random<r1+r2){
-            log.info("微信");
-        }else if (random<r1+r2+r3){
-            log.info("银联");
-        }else {
-            log.info("现金");
+        int a=0;
+        int b=0;
+        int c=0;
+        int d=0;
+        for(int i=0;i<1000;i++){
+            Integer r1 = RandomUtils.nextInt(0,100);
+            Integer r2=RandomUtils.nextInt(0,100-r1);
+            Integer r3=RandomUtils.nextInt(0,100-r1-r2);
+            Integer random = RandomUtils.nextInt(0,100);
+            if(random<r1){
+                a++;
+            }else if (random<r1+r2){
+                b++;
+            }else if (random<r1+r2+r3){
+                c++;
+            }else {
+                d++;
+            }
+        }
+        log.info("a:"+a+",b:"+b+",c:"+c+",d:"+d);
+
+    }
+
+    @Test
+    public void getHour(){
+        Date date=new Date();
+        log.info("输出hour："+date.getHours());
+    }
+
+    @Test
+    public void testRandomTotal(){
+        // 设置随机数个数，最小数为0（分割随机数本身）最大不能大于随机数
+        // 这个长度为设定的长度减一，如获取5个随机数，将len设置为4
+        int len = 2;
+        // 要拆分的数
+        int sources = 486;
+        Random random = new Random();
+        // 先获取到随机数分割的个数，提升效率
+        List<Double> r = new ArrayList<>();
+        for (int i = 0; i < len; i++) {
+            double v = random.nextDouble();
+            r.add(v);
+        }
+        // 从小到大排序，便于后续获取随机数
+        r.sort(new Comparator<Double>() {
+            @Override
+            public int compare(Double o1, Double o2) {
+                return o1 < o2 ? -1 : 1;
+            }
+        });
+        // 用上边的随机数，来取得len份拆分之后的数
+        List<Integer> out = new ArrayList<>();
+        // 记录前一个随机数
+        int last = 0;
+        for (int i = 0; i < len; i++) {
+            int c = (int) (r.get(i) * sources);
+            int i1 = c - last;
+            out.add(i1);
+            last = c;
+        }
+        // 最后一个随机数
+        out.add(sources - last);
+        for(int i=0;i<out.size();i++){
+            log.info("输出："+out.get(i));
         }
     }
+
+
+    @Test
+    public void testRandomMemberTime(){
+        int totalRandom=10000;
+        int j=0;
+
+        int timeLimit=ThreadLocalRandom.current().nextInt(0,50);
+        log.info("限制值："+timeLimit);
+        for (int i = 0; i < totalRandom; i++) {
+            //TODO 0-50%的随机概率 给到会员注册时间，
+            //TODO  注册时间是药店实施时间的0-10分钟随机
+            int timeRandom=ThreadLocalRandom.current().nextInt(0,100);
+            if(timeRandom<timeLimit){
+                j++;
+            }
+        }
+        log.info("输出j:"+j);
+    }
+
+    @Test
+    public void testBigdecimal(){
+        String s = new BigDecimal(1000).divide(new BigDecimal(33), 2, BigDecimal.ROUND_HALF_DOWN).toString();
+        log.info("输出s:"+s);
+    }
+
+
 
 }
